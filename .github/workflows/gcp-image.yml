@@ -153,6 +153,7 @@ jobs:
  #        image: ${{ env.SCAN_IMAGE }}
  #        command: monitor  
   deploy-on-GKE:
+    needs: build-and-push-Docker-Image
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
