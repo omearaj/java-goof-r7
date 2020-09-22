@@ -4,9 +4,9 @@ name: Build Artifact, Build & Push Image
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 env:
   # TODO: Change registry URL if not using Docker Hub
@@ -41,13 +41,13 @@ jobs:
         with:
           command: test
       
-      - name: Run Snyk monitor
-        uses: snyk/actions/maven@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
-        with:
-          command: monitor
-          args: --severity-threshold=high
+#      - name: Run Snyk monitor
+#        uses: snyk/actions/maven@master
+#        env:
+#          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
+#        with:
+#          command: monitor
+#          args: --severity-threshold=high
 
   build_mvn_aritfact:
 
@@ -77,8 +77,8 @@ jobs:
     
     - uses: actions/upload-artifact@v2
       with:
-        name: spring-petclinic
-        path: ${{ env.github_workspace }}./target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar
+        name: java-goof-r7
+        path: ${{ env.github_workspace }}./todolist-web-struts/target/todolist.war
         if-no-files-found: warn #
         
   # Push image to Container Registry
@@ -94,7 +94,7 @@ jobs:
       
       - uses: actions/download-artifact@v2
         with:
-         name: spring-petclinic
+         name: java-goof-r7
          #path: /usr
            
       - name: Build and push Docker images
