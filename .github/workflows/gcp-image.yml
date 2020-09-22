@@ -10,9 +10,9 @@ on:
 
 env:
   # TODO: Change registry URL if not using Docker Hub
-  CONTAINER_REGISTRY_URL: https://registry.hub.docker.com
+  CONTAINER_REGISTRY_URL: https://gcr.io
   # TODO: Change Registry USERID to your userid
-  REGISTRY_USERID: omearaj
+  REGISTRY_USERID: jamieo4626
   #TODO: Only change if you already have a spring-petclinic you want to keep. 
   IMAGE_NAME: java-goof-r7
   IMAGE_BP_NAME: java-goof-r7-bp  
