@@ -92,13 +92,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v2.0
         with:
          name: java-goof-r7
          #path: /usr
            
       - name: Build and push Docker images
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v1.1.1
         with:
          username: ${{ env.REGISTRY_USERID }}
          password: ${{ secrets.DOCKER_KEY }}
