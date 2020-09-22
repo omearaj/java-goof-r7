@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: java-goof
-        image: omearaj/java-goof
+        image: omearaj/java-goof:latest
         ports:
         - containerPort: 8080
