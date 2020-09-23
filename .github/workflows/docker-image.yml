@@ -39,15 +39,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
         with:
-          command: test
-      
-#      - name: Run Snyk monitor
-#        uses: snyk/actions/maven@master
-#        env:
-#          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
-#        with:
-#          command: monitor
-#          args: --severity-threshold=high
+          command: test  
 
   build_mvn_aritfact:
 
@@ -75,11 +67,11 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }} 
       run: mvn install
     
-    - uses: actions/upload-artifact@v2
-      with:
-        name: java-goof-r7
-        path: ${{ env.github_workspace }}./todolist-web-struts/target/todolist.war
-        if-no-files-found: warn #
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: java-goof-r7
+#        path: ${{ env.github_workspace }}./todolist-web-struts/target/todolist.war
+#        if-no-files-found: warn #
         
   # Push image to Container Registry
   build-and-push-Docker-Image:
@@ -92,9 +84,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: actions/download-artifact@v2.0
-        with:
-         name: java-goof-r7
+ #     - uses: actions/download-artifact@v2.0
+ #       with:
+ #        name: java-goof-r7
          #path: /usr
            
       - name: Build and push Docker images
@@ -116,43 +108,6 @@ jobs:
          image: omearaj/${{ env.IMAGE_NAME }}
          command: monitor  
 
- # Push image to Container Registry
- # build-and-push-Buildpack-Image:
-    # Ensure test job passes before pushing image.
- #  needs: build_mvn_aritfact
-
- #   runs-on: ubuntu-latest
- #   if: github.event_name == 'push'
-
- #   steps:
- #     - uses: actions/checkout@v2
- #     
- #     - uses: actions/download-artifact@v2
- #       with:
- #        name: spring-petclinic
-      
- #     - name: Set env Image Path
- #       run: echo ::set-env name=IMAGE_BP_NAME1::${{ env.REGISTRY_USERID}}/${{ env.IMAGE_BP_NAME}}
-           
- #     - name: Build image
- #       uses: mamezou-tech/buildpacks-action@master
- #       with:
- #         image: '${{ env.IMAGE_BP_NAME1 }}'
- #         tag: 'v1.0.0'
- #         path: 'spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar'
- #         builder: 'gcr.io/paketo-buildpacks/builder:base'
- #         env: 'BP_JVM_VERSION=8.*'
-    
- #     - name: Set env SCAN_IMAGE
- #       run: echo ::set-env name=SCAN_IMAGE::${{ env.REGISTRY_USERID}}/${{ env.IMAGE_BP_NAME}}:v1.0.0
-        
- #     - name: Run Snyk to check Docker images for vulnerabilities
- #       uses: snyk/actions/docker@master
- #       env:
- #         SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
- #       with:
- #        image: ${{ env.SCAN_IMAGE }}
- #        command: monitor  
   deploy-on-GKE:
     needs: build-and-push-Docker-Image
     runs-on: ubuntu-latest
