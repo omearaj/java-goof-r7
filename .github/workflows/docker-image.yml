@@ -103,7 +103,7 @@ jobs:
          username: ${{ env.REGISTRY_USERID }}
          password: ${{ secrets.DOCKER_KEY }}
          repository: omearaj/${{ env.IMAGE_NAME }}
-         build_args: TCELL_AGENT_APP_ID=${{ secrets.TCELL_AGENT_APP_ID }}, TCELL_AGENT_API_KEY=${{ secrets.TCELL_AGENT_API_KEY }},  TCELL_API_URL=${{ secrets.TCELL_API_URL}}, TCELL_INPUT_URL=${{ secrets.TCELL_INPUT_URL}}
+         build_args: TCELL_AGENT_APP_ID=${{ secrets.TCELL_AGENT_APP_ID }},TCELL_AGENT_API_KEY=${{ secrets.TCELL_AGENT_API_KEY }},TCELL_API_URL=${{ secrets.TCELL_API_URL}},TCELL_INPUT_URL=${{ secrets.TCELL_INPUT_URL}}
          tag_with_ref: true
          tag_with_sha: true  
          add_git_labels: true  
