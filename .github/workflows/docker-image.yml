@@ -101,7 +101,7 @@ jobs:
         uses: docker/build-push-action@v1.1.1
         with:
          username: ${{ env.REGISTRY_USERID }}
-         password: ${{ secrets.DOCKER_KEY }}TCELL_API_URL
+         password: ${{ secrets.DOCKER_KEY }}
          repository: omearaj/${{ env.IMAGE_NAME }}
          build_args: TCELL_AGENT_APP_ID=${{ secrets.TCELL_AGENT_APP_ID }}, TCELL_AGENT_API_KEY=${{ secrets.TCELL_AGENT_API_KEY }},  TCELL_API_URL=${{ secrets.TCELL_API_URL}}, TCELL_INPUT_URL=${{ secrets.TCELL_INPUT_URL}}
          tag_with_ref: true
