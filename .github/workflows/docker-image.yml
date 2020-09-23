@@ -101,8 +101,9 @@ jobs:
         uses: docker/build-push-action@v1.1.1
         with:
          username: ${{ env.REGISTRY_USERID }}
-         password: ${{ secrets.DOCKER_KEY }}
+         password: ${{ secrets.DOCKER_KEY }}TCELL_API_URL
          repository: omearaj/${{ env.IMAGE_NAME }}
+         build_args: TCELL_AGENT_APP_ID=${{ secrets.TCELL_AGENT_APP_ID }}, TCELL_AGENT_API_KEY=${{ secrets.TCELL_AGENT_API_KEY }},  TCELL_API_URL=${{ secrets.TCELL_API_URL}}, TCELL_INPUT_URL=${{ secrets.TCELL_INPUT_URL}}
          tag_with_ref: true
          tag_with_sha: true  
          add_git_labels: true  
@@ -165,5 +166,5 @@ jobs:
         CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
         ZONE_NAME: us-central1-c
       with:
-        args: apply -f deployment.yaml
+        args: apply -f k8s/deployment.yaml
       
